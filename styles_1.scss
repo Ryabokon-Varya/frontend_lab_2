@@ -1,0 +1,398 @@
+// Variables
+$color-dark: #151414;
+$color-black: black;
+$color-lavender: lavender;
+$color-lightblue: lightblue;
+$color-darkslateblue: darkslateblue;
+$color-slateblue: slateblue;
+$color-plum: plum;
+$color-purple: purple;
+$color-dodgerblue: dodgerblue;
+$color-midnightblue: midnightblue;
+$color-transparent: transparent;
+
+$font-family-serif: 'Georgia', serif;
+$font-family-sans: 'Roboto', sans-serif;
+$font-size-default: 1rem;
+$font-size-lg: 2rem;
+$font-size-sm: 1.3rem;
+
+$padding-default: 10px;
+$padding-search: 8px;
+$padding-search-button: 10px;
+
+$border-radius-default: 12px;
+
+$height-main: 100vh;
+$height-content: 650px;
+$height-content2: 225px;
+$height-image-small: 400px;
+$height-image: 440px;
+$height-sidebar-left: 920px;
+$height-sidebar-right: 600px;
+
+$width-media: 100%;
+
+// Mixins
+@mixin gradient-background($gradient-start, $gradient-end, $start-percentage: 0%, $end-percentage: 100%) {
+  background: linear-gradient(to top, $gradient-start $start-percentage, $gradient-end $end-percentage);
+  background-size: 100%;
+}
+
+@mixin link-style($color: $color-lavender, $font-size: $font-size-sm, $text-decoration: none) {
+  background: none;
+  color: $color;
+  text-decoration: $text-decoration;
+  font-size: $font-size;
+}
+
+@mixin list-style($display: flex, $background: none, $list-style: none, $padding: 0, $margin: 0) {
+  display: $display;
+  background: $background;
+  list-style: $list-style;
+  padding: $padding;
+  margin: $margin;
+}
+
+@mixin border-style($border-width, $border-color, $border-radius) {
+  border: $border-width solid $border-color;
+  border-radius: $border-radius;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flex-height {
+  display: flex;
+  height: $height-main;
+}
+
+@mixin size($height, $width) {
+  height: $height;
+  width: $width;
+}
+
+@mixin background-and-font {
+  background-color: $color-lavender;
+  font-family: $font-family-sans;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin content-style($height, $padding-top) {
+  height: $height;
+  background-color: $color-lavender;
+  padding: $padding-top 25px 25px;
+}
+
+@mixin flex-column-centered {
+  flex-direction: column;
+  align-items: center;
+}
+
+@mixin font-height($height) {
+  font-size: 14px;
+  height: $height;
+}
+
+// Global Styles
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: $font-family-serif;
+  background-color: $color-dark;
+}
+
+// Gradient Animation Section
+@keyframes gradientShift {
+  0% { background-position: 0 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+// Navbar Section
+.navbar {
+  display: flex;
+  background-color: $color-black;
+  padding: $padding-default;
+}
+
+.navbar_container {
+  @include size(95px, 100%);
+  background: $color-black;
+  display: flex;
+  justify-content: space-between;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+#navbar_logo {
+  @include gradient-background($color-darkslateblue, $color-lightblue, 0%, 100%);
+  @include flex-center;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: $color-transparent;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: $font-size-lg;
+
+  #logo_image {
+    background: $color-transparent;
+    height: 80px;
+    margin-right: 10px;
+  }
+}
+
+// Search Section
+#search_form {
+  @include flex-center;
+  background: $color-black;
+  position: relative;
+  max-width: 400px;
+
+  #search_input {
+    @include border-style(1px, $color-lavender, 5px);
+    @include size(50px, 400px);
+    background: $color-lavender;
+    padding: $padding-search;
+    font-size: 16px;
+    flex: 1;
+    color: $color-darkslateblue;
+  }
+
+  #search_button {
+    position: absolute;
+    background-color: $color-transparent;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    cursor: pointer;
+    padding: $padding-search-button;
+
+    img {
+      @include size(20px, 20px);
+      background-color: $color-transparent;
+      margin-top: 2px;
+    }
+  }
+}
+
+// Main Section
+.main {
+  @include flex-height;
+  flex-direction: column;
+}
+
+.main_content {
+  @include flex-height;
+  background-color: $color-dark;
+}
+
+// Top Bar Section
+.top_bar {
+  @include border-style(5px, $color-dark, $border-radius-default);
+  background: linear-gradient(270deg, $color-plum, $color-purple, $color-slateblue, $color-dodgerblue,
+                              $color-midnightblue);
+  background-size: 400% 400%;
+  animation: gradientShift 10s ease infinite;
+  color: $color-lavender;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ul {
+    @include list-style(flex, none, none, 0, 0);
+
+    li {
+      background: none;
+      margin: 0 50px;
+
+      a {
+        @include link-style($color-lavender, $font-size-sm, none);
+      }
+    }
+  }
+}
+
+// Sidebar Section
+.sidebar {
+  @include gradient-background($color-darkslateblue, $color-slateblue, 0%, 80%);
+  @include border-style(4px, $color-dark, $border-radius-default);
+  @include flex-column;
+  width: 300px;
+  padding: 25px;
+  color: $color-lavender;
+  font-size: $font-size-default;
+  gap: 20px;
+
+  ul {
+    @include list-style(flex, none, none, 0, 0);
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  li {
+    background: none;
+    margin: 5px;
+  }
+
+  a {
+    @include link-style($color-lavender, $font-size-sm, none);
+  }
+}
+
+.sidebar_left {
+  height: $height-sidebar-left;
+}
+
+.sidebar_right {
+  height: $height-sidebar-right;
+}
+
+// Content Section
+.content_container {
+  @include flex-column;
+  gap: 20px;
+  flex: 1;
+}
+
+.content, .content2 {
+  @include background-and-font;
+
+  h2, p {
+    @include background-and-font;
+  }
+}
+
+.highlighted-text {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.content {
+  @include border-style(4px, $color-dark, $border-radius-default);
+  @include content-style($height-content, 450px);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.content2 {
+  @include border-style(4px, $color-dark, $border-radius-default);
+  @include content-style($height-content2, 10px);
+}
+
+// Image Section
+.image_container {
+  @include size($height-image, 100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+
+  img {
+    @include size($height-image, 100%);
+    border-radius: 9px 9px 0 0;
+  }
+}
+
+// Media Section
+@media (max-width: 768px) {
+  .navbar_container {
+    @include flex-column-centered;
+    height: 150px;
+  }
+
+  #search-form {
+    margin-top: 10px;
+    width: 90%;
+  }
+
+  #search-input {
+    width: $width-media;
+  }
+
+  .top_bar {
+    ul {
+      @include flex-column-centered;
+      padding: 0;
+      margin: 0;
+
+      li {
+        margin: 10px 0;
+      }
+    }
+  }
+
+  .main_content {
+    @include flex-column-centered;
+  }
+
+  .sidebar {
+    width: $width-media;
+
+    ul {
+      @include flex-column-centered;
+    }
+  }
+
+  .content {
+    @include font-height(650px);
+    padding: 410px 25px 25px;
+  }
+
+  .content2 {
+    @include font-height(290px);
+  }
+
+  .image_container {
+    height: $height-image-small;
+
+    img {
+      height: $height-image-small;
+    }
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1424px) {
+  .top_bar ul li a {
+    font-size: 1rem;
+  }
+
+  #search-input {
+    width: 350px;
+  }
+
+  .sidebar {
+    width: 20vw;
+    min-width: 100px;
+    max-width: 300px;
+
+    a {
+      font-size: 1rem;
+    }
+  }
+
+  .content {
+    @include font-height(660px);
+    padding: 410px 25px 25px;
+  }
+
+  .content2 {
+    @include font-height(300px);
+  }
+
+  .image_container {
+    height: $height-image-small;
+
+    img {
+      height: $height-image-small;
+    }
+  }
+}
