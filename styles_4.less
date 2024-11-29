@@ -1,0 +1,210 @@
+// Variables
+@color-dark: #151414;
+@color-black: black;
+@color-darkslateblue: darkslateblue;
+@color-lightblue: lightblue;
+@color-lavender: lavender;
+@color-slateblue: slateblue;
+@color-transparent: transparent;
+
+@font-family-serif: 'Georgia', serif;
+@font-size-base: 1rem;
+@font-size-logo: 2rem;
+
+@header-height: 100px;
+
+@logo-height: 80px;
+@logo-margin-top: 10px;
+@logo-margin-left: 25px;
+
+@main-content-width: 78%;
+@main-content-margin: 15px;
+
+@sidebar-width: 20%;
+@sidebar-padding: 20px;
+
+@image-height: 400px;
+@image-width-large: 85%;
+@image-width-small: 42.5%;
+@image-width-con-large: 65vh;
+@image-width-con-small: 40vh;
+
+// Mixins
+.gradient-background(@gradient-start, @gradient-end, @start-percentage, @end-percentage) {
+  background-image: linear-gradient(to top, @gradient-start @start-percentage, @gradient-end @end-percentage);
+}
+
+.size(@height, @width) {
+  height: @height;
+  width: @width;
+}
+
+.custom-margin(@margin-top, @margin-right, @margin-bottom, @margin-left) {
+  margin: @margin-top @margin-right @margin-bottom @margin-left;
+}
+
+.custom-bg-padding {
+  background: @color-transparent;
+  padding: 5px;
+}
+
+// Global Styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: @font-family-serif;
+  background-color: @color-dark;
+}
+
+// Header Section
+.header {
+  background: @color-black;
+  height: @header-height;
+  overflow: hidden;
+  top: 0;
+  z-index: 10;
+}
+
+.header_container {
+  background-color: @color-transparent;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.logo {
+  background-color: @color-transparent;
+  display: inline-block;
+  position: relative;
+  height: 100%;
+
+  #logo_image_header {
+    background-color: @color-transparent;
+    height: @logo-height;
+    margin-top: @logo-margin-top;
+    float: left;
+  }
+
+  .logo_text {
+    .gradient-background(@color-darkslateblue, @color-lightblue, 0%, 100%);
+    background-color: @color-transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: @font-size-logo;
+    line-height: @header-height;
+    display: inline-block;
+    float: left;
+    margin-left: @logo-margin-left;
+  }
+}
+
+// Main Section
+.main {
+  width: 100%;
+  overflow: hidden;
+  position: absolute;
+}
+
+.main_content {
+  .size(100%, @main-content-width);
+  background-color: @color-dark;
+  color: @color-lavender;
+  box-sizing: border-box;
+  float: left;
+
+  h1, p {
+    margin: @main-content-margin;
+  }
+}
+
+.main_img_container,
+.main_img_container_1 {
+  .size(@image-height, 60%);
+  .custom-margin(@main-content-margin, -50px, @main-content-margin, @main-content-margin);
+  float: left;
+  overflow: hidden;
+}
+
+.main_img_container img {
+  .size(@image-height, @image-width-large);
+}
+
+.main_img_container_1 img {
+  .size(@image-height, @image-width-small);
+  float: left;
+}
+
+// Sidebar Section
+.sidebar {
+  .size(100%, @sidebar-width);
+  .gradient-background(@color-darkslateblue, @color-slateblue, 0%, 80%);
+  padding: @sidebar-padding;
+  color: @color-lavender;
+  font-size: @font-size-base;
+  position: absolute;
+  right: 0;
+
+  p {
+    .custom-bg-padding;
+    margin-bottom: 30px;
+  }
+
+  h3 {
+    .custom-bg-padding;
+  }
+}
+
+// Media Section
+@media (min-width: 769px) and (max-width: 1424px) {
+  .main_content {
+    width: 65%;
+  }
+
+  .sidebar {
+    width: 30%;
+  }
+
+  .main_img_container,
+  .main_img_container_1 {
+    .size(60%, 100%);
+    .custom-margin(0, 100px, 0, 15px);
+  }
+
+  .main_img_container img {
+    .size(@image-width-con-large, 100%);
+  }
+
+  .main_img_container_1 img {
+    .size(@image-width-con-large, 50%);
+  }
+}
+
+@media (max-width: 768px) {
+  .main_content {
+    width: 95%;
+    margin: 1vw;
+    float: none;
+  }
+
+  .sidebar {
+    .size(auto, 100%);
+    position: relative;
+  }
+
+  .main_img_container,
+  .main_img_container_1 {
+    .size(60%, 100%);
+    .custom-margin(0, 1vw, 0, 1.5vw);
+    float: none;
+  }
+
+  .main_img_container img {
+    .size(@image-width-con-small, 100%);
+  }
+
+  .main_img_container_1 img {
+    .size(@image-width-con-small, 50%);
+  }
+}
