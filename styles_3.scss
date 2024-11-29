@@ -1,0 +1,500 @@
+// Variables
+$color-dark: #151414;
+$color-black: black;
+$color-darkslateblue: darkslateblue;
+$color-lightblue: lightblue;
+$color-lavender: lavender;
+$color-cornflowerblue: cornflowerblue;
+$color-mediumslateblue: mediumslateblue;
+$color-plum: plum;
+$color-purple: purple;
+$color-slateblue: slateblue;
+$color-dodgerblue: dodgerblue;
+$color-midnightblue: midnightblue;
+
+$header-height: 100px;
+$header-container-height: 80px;
+
+$logo-font-size: 2rem;
+$font-family-serif: 'Georgia', serif;
+
+$sign-up-button-height: 50px;
+$sign-up-button-width: 65px;
+
+$start-button-font-size: 1rem;
+$start-button-padding: 14px 32px;
+$start-button-width: 400px;
+
+$main-content-font-size: 2.3rem;
+$main-content-padding: 20px;
+$main-content-width: 50%;
+$main-img-container-width: 50%;
+
+$services-background-size: 400% 400%;
+$services-card-padding: 20px 20px 100px;
+$services-card-border-radius: 20px;
+
+$info-blocks-gap: 50px;
+$info-blocks-margin-bottom: 42px;
+$info-blocks-grid-template-columns: repeat(3, 1fr);
+$info-blocks-grid-template-rows: repeat(2, auto);
+
+$footer-padding: 5rem 0;
+$footer-max-width: 1000px;
+$footer-link-margin-bottom: 0.5rem;
+$footer-link-items-width: 160px;
+
+$start-button-transition: all 0.35s;
+$start-button-hover-width: 100%;
+
+$sign-up-button-transition: all 0.3s ease;
+$gradient-shift-duration: 20s;
+
+// Mixins
+@mixin gradient-background($gradient-start, $gradient-end, $start-percentage, $end-percentage) {
+  background: linear-gradient(to top, $gradient-start $start-percentage, $gradient-end $end-percentage);
+  background-size: 100%;
+}
+
+@mixin size($height, $width) {
+  height: $height;
+  width: $width;
+}
+
+@mixin border-none($radius) {
+  border: none;
+  border-radius: $radius;
+}
+
+@mixin position-top-left($top, $left) {
+  top: $top;
+  left: $left;
+}
+
+@mixin flex-center-width {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+@mixin display-direction-align-items($display, $direction, $align) {
+  display: $display;
+  flex-direction: $direction;
+  align-items: $align;
+}
+
+@mixin background-color($bg-color, $color) {
+  background-color: $bg-color;
+  color: $color;
+}
+
+// Global Styles
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: $font-family-serif;
+}
+
+// Gradient Animation Section
+@keyframes gradientShift {
+  0% { background-position: 0 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+// Header Section
+.header{
+  background: $color-black;
+  height: $header-height;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  font-size: 1.2rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header_container{
+  @include size($header-container-height, 100%);
+  display: flex;
+  justify-content: space-between;
+  z-index: 1;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.logo {
+  @include gradient-background($color-darkslateblue, $color-lightblue, 0%, 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: $logo-font-size;
+  margin-top: 20px;
+
+  #logo_image_header {
+    background: transparent;
+    height: 80px;
+  }
+}
+
+#sign_up_button {
+  @include border-none(5px);
+  @include background-color($color-darkslateblue, $color-lavender);
+  @include size($sign-up-button-height, $sign-up-button-width);
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 24px;
+
+  &:hover {
+    background-color: $color-mediumslateblue;
+    transition: $sign-up-button-transition;
+  }
+}
+
+// Main Section
+.main_container {
+  display: flex;
+  height: auto;
+
+  h1 {
+    font-size: 2.5rem;
+    background-color: lavender;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-block-end: 40px;
+  }
+}
+
+.main_content {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 20px;
+  background-color: #151414;
+
+  p {
+    width: 100%;
+    font-size: 2.3rem;
+    background-color: #151414;
+    color: lavender;
+    margin-block-end: 15px;
+  }
+}
+
+.main_img_container {
+  width: $main-img-container-width;
+
+  img {
+    @include size(100%, 100%);
+    object-fit: cover;
+  }
+}
+
+.start_button {
+  @include gradient-background($color-darkslateblue, $color-cornflowerblue, 0%, 100%);
+  @include border-none(5px);
+  font-size: $start-button-font-size;
+  padding: $start-button-padding;
+  cursor: pointer;
+  position: relative;
+  transition: $start-button-transition;
+  outline: none;
+  width: $start-button-width;
+
+  &:after {
+    @include position-top-left(0, 0);
+    @include size(100%, 0);
+    position: absolute;
+    content: "";
+    background: $color-cornflowerblue;
+    transition: $start-button-transition;
+    border-radius: 5px;
+  }
+
+  &:hover:after {
+    width: $start-button-hover-width;
+  }
+}
+
+#start_button_1 {
+  margin-top: 60px;
+}
+
+#start_button_2 {
+  margin-top: 35px;
+}
+
+#start_button_3 {
+  margin-bottom: 20px;
+}
+
+.get_started_text {
+  position: relative;
+  z-index: 2;
+  color: $color-lavender;
+  text-decoration: none;
+}
+
+// Services Section
+.services {
+  @include display-direction-align-items(flex, column, center);
+  background: linear-gradient(250deg, $color-plum, $color-purple, $color-slateblue, $color-dodgerblue,
+                              $color-midnightblue);
+  background-size: $services-background-size;
+  animation: gradientShift $gradient-shift-duration ease infinite;
+  height: auto;
+  padding-bottom: 50px;
+
+  h2 {
+    @include position-top-left(10px, 0);
+    position: relative;
+  }
+
+  .services_container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .services_card {
+      @include size(auto, 90%);
+      @include background-color(rgba(0, 0, 0, 0.6), $color-lavender);
+      margin: 1rem;
+      max-width: 400px;
+      border-radius: $services-card-border-radius;
+      background-size: cover;
+      position: relative;
+      padding: $services-card-padding;
+      box-sizing: border-box;
+
+      p {
+        @include position-top-left(40px, 0);
+        position: relative;
+        margin-bottom: 35px;
+        line-height: 1.6;
+      }
+    }
+  }
+}
+
+// Guide Section
+.guide {
+  background-color: $color-dark;
+  padding: 20px;
+  text-align: center;
+  height: auto;
+
+  h2 {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    color: $color-lavender;
+    font-size: 2rem;
+  }
+}
+
+.info_blocks {
+  margin-right: 90px;
+  margin-left: 90px;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: $info-blocks-grid-template-columns;
+  grid-template-rows: $info-blocks-grid-template-rows;
+  gap: $info-blocks-gap;
+  margin-bottom: $info-blocks-margin-bottom;
+
+  .info_block {
+    display: flex;
+    align-items: flex-start;
+    background-color: $color-lavender;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: left;
+    gap: 20px;
+
+    .block_number {
+      font-size: 4rem;
+      font-weight: bold;
+    }
+
+    .block_content {
+      display: flex;
+      flex-direction: column;
+
+      h3 {
+        margin: 0;
+        font-size: 1.4rem;
+      }
+
+      p {
+        margin: 5px 0 0;
+      }
+    }
+  }
+}
+
+// Footer Section
+.footer_container {
+  @include display-direction-align-items(flex, column, center);
+  background-color: $color-black;
+  padding: $footer-padding;
+  justify-content: center;
+
+  .footer_content {
+    @include flex-center-width;
+    align-items: center;
+    max-width: $footer-max-width;
+
+    .footer_links {
+      @include flex-center-width;
+
+      .footer_link_wrapper {
+        @include flex-center-width;
+
+        .footer_link_items {
+          @include display-direction-align-items(flex, column, flex-start);
+          margin: 16px;
+          text-align: left;
+          width: $footer-link-items-width;
+          box-sizing: border-box;
+
+          h2 {
+            margin-bottom: 16px;
+            color: $color-lavender;
+          }
+
+          a {
+            color: $color-lavender;
+            text-decoration: none;
+            margin-bottom: $footer-link-margin-bottom;
+          }
+        }
+      }
+    }
+  }
+}
+
+#logo_image_footer {
+  background: transparent;
+  height: 150px;
+}
+
+// Media Section
+@media (min-width: 769px) and (max-width: 1424px) {
+
+  .header_container{
+    padding: 0 20px;
+  }
+
+  .main_container {
+    flex-direction: row;
+    height: auto;
+  }
+
+  .main_content {
+    width: 60%;
+    padding: 20px;
+  }
+
+  .main_img_container {
+    width: 40%;
+  }
+
+  .services_container {
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+
+  .guide{
+    height: auto;
+  }
+
+  .info_blocks {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .info_block:last-child {
+    grid-column: span 2;
+    justify-self: center;
+  }
+
+  .start_button{
+    margin-bottom: 50px;
+  }
+
+  .footer_container {
+    padding: 0 50px;
+  }
+
+  .footer_content {
+    @include display-direction-align-items(flex, column, center);
+    text-align: center;
+    width: 100%;
+  }
+
+  .footer_link_wrapper {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .header_container {
+    padding: 0 20px;
+  }
+
+  .main_container h1{
+    font-size: 2rem;
+  }
+
+  .main_content p{
+    font-size: 2rem;
+  }
+
+  .main_container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .main_content {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .main_img_container {
+    width: 100%;
+    background-color: $color-dark;
+  }
+
+  .guide{
+    height: auto;
+  }
+
+  .info_blocks {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .start_button{
+    margin-bottom: 50px;
+  }
+
+  .footer_container {
+    padding: 0 50px;
+  }
+
+  .footer_content {
+    @include display-direction-align-items(flex, column, center);
+    text-align: center;
+    width: 100%;
+  }
+
+  .footer_link_wrapper {
+    width: 100%;
+  }
+}
