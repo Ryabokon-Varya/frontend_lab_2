@@ -1,0 +1,307 @@
+// Variables
+@color-black: black;
+@color-plum: plum;
+@color-purple: purple;
+@color-slateblue: slateblue;
+@color-dodgerblue: dodgerblue;
+@color-midnightblue: midnightblue;
+@color-darkslateblue: darkslateblue;
+@color-cornflowerblue: cornflowerblue;
+@color-lavender: lavender;
+
+@spacing-padding-small: 10px;
+@spacing-margin-small: 10px;
+@spacing-padding-standard: 20px;
+@spacing-padding-medium: 15px;
+@spacing-margin-medium: 15px;
+
+@size-logo-width: 300px;
+@size-image-width-small: 15vw;
+@size-image-height-small: 31vh;
+
+@border-radius-standard: 15px;
+@border-radius-input: 5px;
+
+@font-size-xsmall: 1.2rem;
+@font-size-small: 1.5rem;
+@font-size-medium: 2.5rem;
+@font-size-large: 3rem;
+
+@animation-duration: 20s;
+
+// Mixins
+.size(@height, @width) {
+  height: @height;
+  width: @width;
+}
+
+.bg-color-text-color(@bg-color, @text-color) {
+  background-color: @bg-color;
+  color: @text-color;
+}
+
+.margin-center {
+  margin: 0;
+  text-align: center;
+}
+
+.text-align-margin-top(@margin-top) {
+  text-align: center;
+  margin-top: @margin-top;
+}
+
+.border-style(@border, @border-radius) {
+  border: @border;
+  border-radius: @border-radius;
+}
+
+// Global Styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Georgia', serif;
+}
+
+// Gradient Animation Section
+@keyframes gradientShift {
+  0% { background-position: 0 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+// Main Section
+.main {
+  background: linear-gradient(250deg, @color-plum, @color-purple, @color-slateblue, @color-dodgerblue,
+                              @color-midnightblue);
+  background-size: 500% 500%;
+  animation: gradientShift @animation-duration ease infinite;
+  color: @color-lavender;
+  padding: @spacing-padding-standard;
+}
+
+table {
+  width: 80%;
+  margin: 0 auto;
+  border-collapse: separate;
+  border-spacing: 30px;
+
+  td {
+    text-align: center;
+  }
+}
+
+// Logo Section
+.logo {
+  padding-top: 20vh;
+  padding-bottom: 10vh;
+  text-align: center;
+}
+
+.logo_image {
+  width: @size-logo-width;
+  vertical-align: middle;
+  margin-top: -45px;
+}
+
+.logo_text {
+  display: inline-block;
+  margin-left: 5px;
+  text-align: left;
+
+  h3 {
+    font-size: @font-size-large;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: @font-size-medium;
+    margin-left: 20px;
+  }
+}
+
+// Content Section
+.content {
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: @border-radius-standard;
+  padding: @spacing-padding-medium;
+}
+
+.image_container {
+  display: inline-block;
+  margin-right: @spacing-margin-medium;
+}
+
+.image {
+  .size(@size-image-height-small, @size-image-width-small);
+  border-radius: @border-radius-standard;
+}
+
+.text_container {
+  text-align: left;
+  margin-top: 20px;
+  display: inline-block;
+  vertical-align: top;
+  color: @color-lavender;
+  width: calc(100% - @size-image-width-small - 30px);
+
+  h3 {
+    font-size: @font-size-small;
+  }
+
+  p {
+    font-size: @font-size-xsmall;
+  }
+}
+
+// Email Section
+.email_bar {
+  padding: 0;
+}
+
+.email_input {
+  .border-style(1px solid @color-lavender, @border-radius-input);
+  .bg-color-text-color(@color-lavender, @color-darkslateblue);
+  width: 40%;
+  padding: @spacing-padding-small;
+  font-size: 1rem;
+  margin-right: @spacing-margin-small;
+  margin-bottom: 120px;
+  text-align: center;
+
+  &:focus {
+    border-color: @color-darkslateblue;
+    border-width: 2px;
+    outline: 2px solid @color-lavender;
+  }
+}
+
+.subscribe_btn {
+  .bg-color-text-color(@color-cornflowerblue, @color-lavender);
+  .border-style(2px solid @color-lavender, @border-radius-input);
+  padding: @spacing-padding-small @spacing-padding-standard;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    .bg-color-text-color(@color-lavender, @color-cornflowerblue);
+  }
+}
+
+// Footer Section
+footer {
+  .bg-color-text-color(@color-black, @color-lavender);
+  padding: 5px 0;
+  text-align: center;
+}
+
+.footer_table {
+  width: 40%;
+  margin-top: 15px;
+  border-collapse: collapse;
+
+  td {
+    padding: 5px;
+  }
+}
+
+.footer_link_items {
+  padding: 0;
+  margin: 0;
+
+  a {
+    color: @color-lavender;
+    text-decoration: none;
+    display: block;
+    transition: color 0.3s;
+  }
+}
+
+// Media Section
+@media (min-width: 769px) and (max-width: 1424px) {
+  .content {
+    text-align: center;
+  }
+
+  .image_container {
+    .size(auto, 28vw);
+    margin: 1vw;
+  }
+
+  .image {
+    .size(32vh, 28vw);
+    max-height: 100%;
+  }
+
+  .text_container {
+    .size(10vh, 30vw);
+    text-align: center;
+    padding: @spacing-padding-small;
+    margin-bottom: 12vh;
+
+    h3 {
+      .margin-center;
+    }
+
+    p {
+      .margin-center;
+    }
+  }
+
+  .email_input {
+    width: 60%;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo_text {
+    text-align: center;
+
+    h3 {
+      font-size: @font-size-large;
+      margin: @spacing-margin-small;
+    }
+
+    p {
+      font-size: @font-size-medium;
+      margin: 1vw;
+    }
+  }
+
+  .content {
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  .image_container {
+    margin: 1vw;
+  }
+
+  .image {
+    .size(35vh, 50vw);
+  }
+
+  .text_container {
+    h3 {
+      .text-align-margin-top(1px);
+    }
+
+    p {
+      .text-align-margin-top(5px);
+    }
+  }
+
+  .email_input {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .subscribe_btn {
+    margin-bottom: 100px;
+  }
+
+  .footer_table {
+    width: 80%;
+  }
+}
