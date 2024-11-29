@@ -1,0 +1,340 @@
+// Variables
+$color-dark: #151414;
+$color-black: black;
+$color-lavender: lavender;
+$color-lightblue: lightblue;
+$color-darkslateblue: darkslateblue;
+$color-mediumslateblue: mediumslateblue;
+$color-slateblue: slateblue;
+$color-lavenderblush: lavenderblush;
+
+$font-family-serif: 'Georgia', serif;
+$font-size-base: 16px;
+$font-size-large: 2rem;
+$font-size-small: 1rem;
+$font-size-sidebar-left: 1rem;
+$font-size-product-title: 1.3rem;
+
+$spacing-xsmall: 3px;
+$spacing-small: 5px;
+$spacing-xmedium: 10px;
+$spacing-medium: 20px;
+$spacing-large: 25px;
+
+$border-radius: 5px;
+$border-radius-large: 10px;
+$border-width: 2px;
+
+$transition-duration: 0.3s;
+$transition-duration-fast: 0.2s;
+
+$width-button: 60px;
+$width-search-input: 1110px;
+$width-sidebar-left: 270px;
+$width-product-button: 80px;
+
+$height-search-input: 50px;
+$height-button: 50px;
+$height-product-button: 80px;
+$height-product-image: 200px;
+
+$margin-right-search-input: 30px;
+$margin-right-product-grid: 100px;
+$margin-top-product-grid: 2px;
+
+$padding-main-content: 25px 25px;
+$padding-small-input: 8px;
+$padding-button: 9px 15px;
+
+$gap-main-content: 20px;
+$gap-product-grid: 20px;
+
+// Mixins
+@mixin gradient-background($gradient-start, $gradient-end, $start-percentage, $end-percentage) {
+  background: linear-gradient(to top, $gradient-start $start-percentage, $gradient-end $end-percentage);
+  background-size: 100%;
+}
+
+@mixin grid-background-color($bg-color) {
+  background-color: $bg-color;
+  display: grid;
+}
+
+@mixin grid-background($bg-color) {
+  background: $bg-color;
+  display: grid;
+}
+
+@mixin border-style($border-width, $border-color, $radius) {
+  border: $border-width solid $border-color;
+  border-radius: $radius;
+}
+
+@mixin border-none($radius) {
+  border: none;
+  border-radius: $radius;
+}
+
+@mixin size($height, $width) {
+  height: $height;
+  width: $width;
+}
+
+@mixin background-color($bg-color, $color) {
+  background-color: $bg-color;
+  color: $color;
+}
+
+// Global Styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: $font-family-serif;
+  background-color: $color-dark;
+}
+
+// Header Section
+.header {
+  @include grid-background-color($color-black);
+  justify-items: center;
+  padding: 0 $spacing-medium;
+}
+
+.header-container {
+  @include grid-background-color($color-black);
+  @include size(95px, 100%);
+  grid-template-columns: auto 1fr;
+  align-items: center;
+
+  #header-logo {
+    @include gradient-background($color-darkslateblue, $color-lightblue, 0%, 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+    font-size: $font-size-large;
+    margin-right: $margin-right-search-input;
+  }
+}
+
+#main-nav {
+  @include grid-background($color-black);
+  justify-items: center;
+}
+
+// Search Section
+#search-form {
+  @include grid-background($color-black);
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  width: 100%;
+}
+
+#search-input {
+  @include border-style(1px, $color-lavender, $border-radius);
+  @include size($height-search-input, $width-search-input);
+  background: $color-lavender;
+  padding: $padding-small-input;
+  font-size: $font-size-base;
+  margin-right: $margin-right-search-input;
+  color: $color-darkslateblue;
+
+  &:focus {
+    border-color: $color-darkslateblue;
+    border-width: $border-width;
+    outline: 2px solid $color-lavenderblush;
+  }
+}
+
+#search-button {
+  @include border-none($border-radius);
+  @include size($height-button, $width-button);
+  @include background-color($color-darkslateblue, $color-lavenderblush);
+  font-size: $font-size-small;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-mediumslateblue;
+    transition: all $transition-duration ease;
+  }
+}
+
+// Main Section
+.main-content {
+  display: grid;
+  grid-template-columns: 300px auto;
+  gap: $gap-main-content;
+  padding: $padding-main-content;
+}
+
+// Sidebar Section
+.sidebar_left {
+  @include gradient-background($color-darkslateblue, $color-slateblue, 0%, 80%);
+  @include border-style(4px, $color-dark, $border-radius-large);
+  @include background-color($color-darkslateblue, $color-lavenderblush);
+  width: $width-sidebar-left;
+  padding: $spacing-large;
+  font-size: $font-size-sidebar-left;
+  grid-template-rows: auto 1fr;
+
+  ul,
+  li,
+  a,
+  b,
+  h2 {
+    background-color: transparent;
+  }
+
+  ul {
+    list-style: none;
+    display: grid;
+  }
+
+  li {
+    margin: $spacing-small;
+  }
+
+  a {
+    color: $color-lavender;
+    text-decoration: none;
+    font-size: $font-size-product-title;
+  }
+
+  h2 {
+    color: $color-lavender;
+  }
+}
+
+// Product Section
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $gap-product-grid;
+  margin-right: $margin-right-product-grid;
+  margin-top: $margin-top-product-grid;
+}
+
+.product-item {
+  @include border-style($border-width, $color-lavender, 8px);
+  background-color: $color-lavender;
+  padding: 0;
+  overflow: hidden;
+  flex-direction: column;
+
+  &:hover {
+    transform: scale(1.045);
+    transition: $transition-duration-fast ease-in;
+  }
+}
+
+.product-image {
+  @include size($height-product-image, 100%);
+  display: block;
+  border-radius: 0;
+  margin: 0;
+}
+
+.product-info {
+  @include grid-background-color(transparent);
+  grid-template-columns: 1fr auto;
+  padding: 10px;
+
+  .product-details {
+    background-color: transparent;
+  }
+
+  .product-title,
+  .product-price {
+    background-color: transparent;
+    margin: 10px;
+  }
+}
+
+.product-button {
+  @include border-none($border-radius-large);
+  @include size($height-product-button, $width-product-button);
+  @include background-color($color-darkslateblue, $color-lavenderblush);
+  padding: $padding-button;
+  font-size: $font-size-small;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-mediumslateblue;
+    transition: all $transition-duration ease;
+  }
+}
+
+// Media Section
+@media (min-width: 769px) and (max-width: 1424px) {
+  #search-input {
+    width: 95%;
+  }
+
+  .main-content {
+    grid-template-columns: 1fr;
+    padding: $spacing-xmedium;
+  }
+
+  .sidebar_left {
+    width: 100%;
+    text-align: center;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-large;
+    margin-right: $spacing-xsmall;
+    margin-left: $spacing-xsmall;
+  }
+
+  .product-button {
+    @include size(auto, $width-product-button);
+  }
+
+  .product-image {
+    height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    align-items: center;
+    padding: $spacing-medium;
+    height: auto;
+  }
+
+  #header-logo {
+    font-size: $font-size-large;
+    margin: 0 $spacing-medium $spacing-medium;
+    text-align: center;
+  }
+
+  #search-input {
+    width: 100%;
+  }
+
+  #search-button {
+    margin-left: 5vw;
+  }
+
+  .main-content {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar_left {
+    width: 100%;
+    text-align: center;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: $gap-main-content;
+    width: 100%;
+  }
+
+  .product-image {
+    height: 300px;
+  }
+}
